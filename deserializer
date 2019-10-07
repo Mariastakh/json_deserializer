@@ -9,13 +9,21 @@ public class Program
 	{
 		var client = new WebClient();
 		
-		var body = client.DownloadString("AIRTABLE API HERE");
+		var body = client.DownloadString("AIR TABLE API URL + KEY");
 		var output = JsonConvert.DeserializeObject<RootObject>(body);
-		
+	
 		
         foreach(Record item in output.records)
                 {
-                    Console.WriteLine(item.id, item.fields);
+                   	Console.WriteLine(item.id);
+					Console.WriteLine(item.createdTime);
+					//Console.WriteLine(item.fields.Categories);
+					Console.WriteLine(item.fields.Host);
+					//Console.WriteLine(item.fields.Type);
+					Console.WriteLine(item.fields.Location);
+					Console.WriteLine(item.fields.Duration);
+					Console.WriteLine(item.fields.Name);
+				
 					
                 }
 		
@@ -26,9 +34,11 @@ public class Fields
 	{
 		//public string Categories;
 		public string Host;
-		public string Type;
+		//public string Type;
 		public string Location;
 		public string Name;
+		public string Time;
+		public string Duration;
 	}
 
 public class Record
@@ -38,7 +48,12 @@ public class Record
 	   public string createdTime;
    }
 
+public class Categories{
+	
+}
+
 public class RootObject
 { 
 	public List<Record> records;
 }
+
