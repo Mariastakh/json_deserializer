@@ -1,0 +1,44 @@
+using System;
+using System.Net;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		var client = new WebClient();
+		
+		var body = client.DownloadString("AIRTABLE API HERE");
+		var output = JsonConvert.DeserializeObject<RootObject>(body);
+		
+		
+        foreach(Record item in output.records)
+                {
+                    Console.WriteLine(item.id, item.fields);
+					
+                }
+		
+	}
+}
+
+public class Fields
+	{
+		//public string Categories;
+		public string Host;
+		public string Type;
+		public string Location;
+		public string Name;
+	}
+
+public class Record
+   {
+	   public string id;
+	   public Fields fields;
+	   public string createdTime;
+   }
+
+public class RootObject
+{ 
+	public List<Record> records;
+}
